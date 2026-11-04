@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary / build artifacts
+*.tmp
+*.tmp.html
+.DS_Store
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Internal team training & study guides (keep private/local)
+TaiLieuNoiBo_Nhom8/

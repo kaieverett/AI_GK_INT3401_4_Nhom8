@@ -1,0 +1,10 @@
+# ============================================================================
+# YÊU CẦU THƯ VIỆN - BÀI TẬP LỚN AI (MÃ LỚP: INT3401 4 - NHÓM 8)
+# ============================================================================
+# 1. ĐỂ CHẠY TRÒ CHƠI (GUI & CLI) VÀ CHẠY THỰC NGHIỆM (--exp):
+#    KHÔNG cần cài đặt bất kỳ thư viện ngoài nào! Chương trình sử dụng 100%
+#    thư viện chuẩn sẵn có của Python 3 (tkinter, math, random, time, csv, json).
+#
+# 2. TÙY CHỌN (Chỉ cần nếu muốn vẽ lại các file ảnh biểu đồ PNG bằng lệnh --plot):
+matplotlib>=3.5.0
+numpy>=1.21.0
