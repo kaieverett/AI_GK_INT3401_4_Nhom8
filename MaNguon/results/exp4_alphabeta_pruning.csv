@@ -1,0 +1,9 @@
+preset,description,depth,chosen_move_pure,chosen_move_ab,same_optimal_move,nodes_pure,nodes_ab,pruned_branches,node_reduction_pct,time_pure_ms,time_ab_ms,speedup_factor
+khai_cuoc,Trạng thái 1: Khai cuộc (4 quân ở trung tâm),2,"(5, 4)","(5, 4)",True,210,41,13,80.5,3.88,1.34,2.89
+khai_cuoc,Trạng thái 1: Khai cuộc (4 quân ở trung tâm),3,"(5, 4)","(5, 4)",True,2954,250,26,91.5,55.04,5.69,9.67
+trung_cuoc,"Trạng thái 2: Trung cuộc giằng co (10 quân, nhiều hướng phát triển)",2,"(5, 3)","(5, 3)",True,210,83,11,60.5,5.24,2.64,1.99
+trung_cuoc,"Trạng thái 2: Trung cuộc giằng co (10 quân, nhiều hướng phát triển)",3,"(5, 3)","(5, 3)",True,2954,331,49,88.8,79.88,11.52,6.94
+chan_chuoi_4,"Trạng thái 3: Nguy cấp - Đối phương (X) đã có 4 quân liên tiếp, O bắt buộc phải chặn",2,"(4, 6)","(4, 6)",True,210,41,13,80.5,4.2,1.47,2.85
+chan_chuoi_4,"Trạng thái 3: Nguy cấp - Đối phương (X) đã có 4 quân liên tiếp, O bắt buộc phải chặn",3,"(4, 6)","(4, 6)",True,2590,54,26,97.9,58.83,2.66,22.15
+bay_doi_3_3,Trạng thái 4: Thế cờ phức tạp - Tạo nước đôi (Fork) đường ngang và đường chéo,2,"(2, 2)","(2, 2)",True,210,41,13,80.5,5.59,2.04,2.73
+bay_doi_3_3,Trạng thái 4: Thế cờ phức tạp - Tạo nước đôi (Fork) đường ngang và đường chéo,3,"(2, 2)","(2, 2)",True,2954,250,26,91.5,81.77,8.66,9.45

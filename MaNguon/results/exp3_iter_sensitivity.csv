@@ -1,0 +1,4 @@
+agent_a,agent_b,total_games,wins,draws,losses,win_rate_pct,draw_rate_pct,loss_rate_pct,avg_time_a_sec,avg_time_b_sec,avg_game_moves,c,iterations
+"MCTS (c=1.4, iter=100)",Đối thủ cố định (MCTS iter=150),20,6,0,14,30.0,0.0,70.0,0.0123,0.0189,30.0,1.4,100
+"MCTS (c=1.4, iter=300)",Đối thủ cố định (MCTS iter=150),20,14,0,6,70.0,0.0,30.0,0.0383,0.0192,25.9,1.4,300
+"MCTS (c=1.4, iter=500)",Đối thủ cố định (MCTS iter=150),20,18,0,2,90.0,0.0,10.0,0.0637,0.0189,22.3,1.4,500

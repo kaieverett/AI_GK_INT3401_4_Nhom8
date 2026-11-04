@@ -1,0 +1,4 @@
+agent_a,agent_b,total_games,wins,draws,losses,win_rate_pct,draw_rate_pct,loss_rate_pct,avg_time_a_sec,avg_time_b_sec,avg_game_moves,iterations
+MCTS Heuristic Rollout (iter=100),MCTS Random Rollout (iter=100),20,20,0,0,100.0,0.0,0.0,0.1136,0.0111,11.5,100
+MCTS Heuristic Rollout (iter=300),MCTS Random Rollout (iter=300),20,20,0,0,100.0,0.0,0.0,0.3072,0.034,11.3,300
+MCTS Heuristic Rollout (iter=500),MCTS Random Rollout (iter=500),20,20,0,0,100.0,0.0,0.0,0.5302,0.0572,11.1,500
