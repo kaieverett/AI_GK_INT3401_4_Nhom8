@@ -16,8 +16,7 @@ import os
 import platform
 import random
 import sys
-import time
-from typing import Callable, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Tuple
 
 # Đảm bảo import được các module ở thư mục gốc MaNguon
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -122,7 +121,7 @@ def evaluate_matchup(
     num_pairs: int = 10,
     label_a: str = "Agent A",
     label_b: str = "Agent B",
-) -> Dict[str, object]:
+) -> Dict[str, Any]:
     """
     Đánh giá 1 cặp đấu với `num_pairs` cặp ván (tổng cộng 2 * num_pairs = 20 ván),
     hoán đổi người đi trước (X) và đi sau (O) trên từng thế cờ khai cuộc để đảm bảo công bằng tuyệt đối.
@@ -197,14 +196,14 @@ def evaluate_matchup(
     return result
 
 
-def run_exp_alphabeta_pruning() -> List[Dict[str, object]]:
+def run_exp_alphabeta_pruning() -> List[Dict[str, Any]]:
     """
     Thực nghiệm Bài 1.2c: Giải thích và chứng minh hiệu quả của cắt tỉa Alpha-Beta
     so với MiniMax không cắt tỉa trên 4 trạng thái bàn cờ thử nghiệm ở độ sâu d=2 và d=3.
     """
     print("\n[Thực nghiệm 1.2c] Đối sánh MiniMax KHÔNG cắt tỉa vs MiniMax CÓ cắt tỉa Alpha-Beta...")
     presets = ["khai_cuoc", "trung_cuoc", "chan_chuoi_4", "bay_doi_3_3"]
-    rows: List[Dict[str, object]] = []
+    rows: List[Dict[str, Any]] = []
 
     for p_name in presets:
         for d in (2, 3):
@@ -255,7 +254,7 @@ def run_exp_alphabeta_pruning() -> List[Dict[str, object]]:
     return rows
 
 
-def run_all_experiments() -> Dict[str, object]:
+def run_all_experiments() -> Dict[str, Any]:
     os.makedirs(RESULTS_DIR, exist_ok=True)
     random.seed(RANDOM_SEED)
     sys_info = get_system_info()

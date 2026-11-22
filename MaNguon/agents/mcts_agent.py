@@ -197,6 +197,7 @@ class MCTSAgent(BaseAgent):
             )
 
         chosen_move = best_child.move
+        assert chosen_move is not None, "Best child node must have an associated move"
         win_rate = (best_child.wins / best_child.visits) if best_child.visits > 0 else 0.0
         elapsed = time.perf_counter() - start_time
 
@@ -227,7 +228,8 @@ class MCTSAgent(BaseAgent):
         """
         while not sim_board.is_game_over() and node.is_fully_expanded() and node.children:
             node = node.select_best_child_uct(self.c)
-            sim_board.make_move(node.move[0], node.move[1])
+            if node.move is not None:
+                sim_board.make_move(node.move[0], node.move[1])
         return node
 
     def _expand(self, node: MCTSNode, sim_board: Board) -> MCTSNode:

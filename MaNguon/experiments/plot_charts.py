@@ -64,10 +64,10 @@ def generate_all_charts() -> None:
     width = 0.52
 
     fig, ax = plt.subplots(figsize=(10, 5.2))
-    p1 = ax.bar(x, win_rates, width, label="Tỷ lệ Thắng (%)", color="#1a73e8")
-    p2 = ax.bar(x, draw_rates, width, bottom=win_rates, label="Tỷ lệ Hòa (%)", color="#fbbc04")
+    ax.bar(x, win_rates, width, label="Tỷ lệ Thắng (%)", color="#1a73e8")
+    ax.bar(x, draw_rates, width, bottom=win_rates, label="Tỷ lệ Hòa (%)", color="#fbbc04")
     bottom_loss = [w + d for w, d in zip(win_rates, draw_rates)]
-    p3 = ax.bar(x, loss_rates, width, bottom=bottom_loss, label="Tỷ lệ Thua (%)", color="#ea4335")
+    ax.bar(x, loss_rates, width, bottom=bottom_loss, label="Tỷ lệ Thua (%)", color="#ea4335")
 
     ax.set_ylabel("Tỷ lệ phần trăm (%)", fontsize=11, fontweight="bold")
     ax.set_title("Đồ thị 1: Kết quả Đối sánh Trực tiếp giữa các Thuật toán (20 ván/cặp, hoán đổi tiên/hậu)", fontsize=12, fontweight="bold", pad=14)
@@ -99,7 +99,7 @@ def generate_all_charts() -> None:
     w_bar = 0.25
 
     b_win = ax.bar(x_c - w_bar, c_win, w_bar, label="Thắng (%)", color="#1e8e3e")
-    b_draw = ax.bar(x_c, c_draw, w_bar, label="Hòa (%)", color="#f9ab00")
+    ax.bar(x_c, c_draw, w_bar, label="Hòa (%)", color="#f9ab00")
     b_loss = ax.bar(x_c + w_bar, c_loss, w_bar, label="Thua (%)", color="#d93025")
 
     ax.plot(x_c - w_bar, c_win, color="#0d652d", marker="o", linewidth=2, linestyle="--", label="Đường xu hướng Tỷ lệ thắng")
@@ -148,7 +148,7 @@ def generate_all_charts() -> None:
         ax1.text(rect.get_x() + rect.get_width() / 2.0, h + 1.8, f"{h:.1f}%", ha="center", va="bottom", color="#1a73e8", fontweight="bold", fontsize=10)
 
     ax2 = ax1.twinx()
-    line = ax2.plot(x_it + 0.15, it_time_ms, color="#d93025", marker="s", markersize=8, linewidth=2.5, label="Thời gian xử lý TB/nước (ms)")
+    ax2.plot(x_it + 0.15, it_time_ms, color="#d93025", marker="s", markersize=8, linewidth=2.5, label="Thời gian xử lý TB/nước (ms)")
     ax2.set_ylabel("Thời gian suy luận TB / nước (ms)", color="#d93025", fontsize=11, fontweight="bold")
     ax2.tick_params(axis="y", labelcolor="#d93025")
     ax2.set_ylim(0, max(it_time_ms) * 1.30)

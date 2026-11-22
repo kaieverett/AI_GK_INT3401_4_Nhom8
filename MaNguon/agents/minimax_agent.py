@@ -7,7 +7,7 @@ Mô tả: Cài đặt thuật toán MiniMax kết hợp cắt tỉa Alpha-Beta (
 
 import math
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Tuple
 from core.board import Board
 from core.evaluator import Evaluator
 from .base_agent import BaseAgent

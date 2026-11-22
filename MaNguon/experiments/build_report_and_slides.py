@@ -14,6 +14,8 @@ import os
 import sys
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
 PROJECT_DIR = os.path.dirname(ROOT_DIR)
 RESULTS_DIR = os.path.join(ROOT_DIR, "results")
 CHARTS_DIR = os.path.join(RESULTS_DIR, "charts")
@@ -914,12 +916,8 @@ Dự án Bài tập lớn giữa kỳ Học phần Trí tuệ nhân tạo của 
 
 
 def build_slides_html(data: dict) -> str:
-    sys_info = data["system_info"]
     ab_rows = [r for r in data["alphabeta_pruning"] if r["depth"] == 3]
     h2h_rows = data["head_to_head"]
-    c_rows = data["c_sensitivity"]
-    it_rows = data["iter_sensitivity"]
-    b2_rows = data["bai2_heuristic_rollout"]
 
     c1_b64 = img_to_base64(os.path.join(CHARTS_DIR, "chart1_head_to_head.png"))
     c2_b64 = img_to_base64(os.path.join(CHARTS_DIR, "chart2_c_sensitivity.png"))
@@ -1377,10 +1375,10 @@ def build_slides_html(data: dict) -> str:
     return html
 
 
-def build_pptx_slides(data: dict, pptx_path: str) -> None:
-    from pptx import Presentation
-    from pptx.util import Inches, Pt
-    from pptx.dml.color import RGBColor
+def build_pptx_slides(_data: dict, pptx_path: str) -> None:
+    from pptx import Presentation  # pyrefly: ignore[missing-import]
+    from pptx.util import Inches, Pt  # pyrefly: ignore[missing-import]
+    from pptx.dml.color import RGBColor  # pyrefly: ignore[missing-import]
 
     prs = Presentation()
     prs.slide_width = Inches(13.333)
@@ -1501,7 +1499,7 @@ def build_pptx_slides(data: dict, pptx_path: str) -> None:
 
 
 def render_html_to_pdf(html_content: str, pdf_path: str, landscape: bool = False) -> None:
-    from playwright.sync_api import sync_playwright
+    from playwright.sync_api import sync_playwright  # pyrefly: ignore[missing-import]
 
     os.makedirs(os.path.dirname(pdf_path), exist_ok=True)
     temp_html = pdf_path + ".tmp.html"
@@ -1542,7 +1540,7 @@ def render_html_to_pdf(html_content: str, pdf_path: str, landscape: bool = False
 
 
 def main() -> None:
-    from plot_charts import generate_all_charts
+    from experiments.plot_charts import generate_all_charts
     generate_all_charts()
 
     summary_path = os.path.join(RESULTS_DIR, "experiment_summary.json")

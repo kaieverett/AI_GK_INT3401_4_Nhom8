@@ -187,7 +187,7 @@ class CaroGUI:
             return None  # Người chơi
 
         try:
-            d = max(1, int(self.var_depth.get()))
+            d = max(1, self.var_depth.get())
         except Exception:
             d = 2
         try:
@@ -195,7 +195,7 @@ class CaroGUI:
         except Exception:
             c_val = 1.4
         try:
-            iters = max(10, int(self.var_iter.get()))
+            iters = max(10, self.var_iter.get())
         except Exception:
             iters = 300
 
@@ -280,7 +280,7 @@ class CaroGUI:
         c = (x - self.MARGIN) // self.CELL_SIZE
         r = (y - self.MARGIN) // self.CELL_SIZE
         if 0 <= r < BOARD_SIZE and 0 <= c < BOARD_SIZE:
-            return int(r), int(c)
+            return r, c
         return None
 
     def _on_left_click(self, event: tk.Event) -> None:
@@ -380,7 +380,7 @@ class CaroGUI:
         agent = self._build_agent(curr_sel)
         if agent is None:
             # Nếu đang để là Người chơi nhưng bấm "AI Đi 1 Nước", mặc định gọi MiniMax Alpha-Beta
-            agent = MiniMaxAgent(depth=max(1, int(self.var_depth.get())), use_alpha_beta=True)
+            agent = MiniMaxAgent(depth=max(1, self.var_depth.get()), use_alpha_beta=True)
 
         r, c, stats = agent.get_move(self.board)
         self.board.make_move(r, c)
@@ -477,13 +477,15 @@ def _enable_windows_dpi_awareness() -> None:
         return
     try:
         import ctypes
-        ctypes.windll.shcore.SetProcessDpiAwareness(1)
-    except Exception:
+        windll = getattr(ctypes, "windll", None)
+        if windll is None:
+            return
         try:
-            import ctypes
-            ctypes.windll.user32.SetProcessDPIAware()
+            windll.shcore.SetProcessDpiAwareness(1)
         except Exception:
-            pass
+            windll.user32.SetProcessDPIAware()
+    except Exception:
+        pass
 
 
 def run_gui() -> None:
