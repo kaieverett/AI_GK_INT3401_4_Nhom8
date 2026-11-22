@@ -13,5 +13,9 @@ __pycache__/
 venv/
 ENV/
 
+# Local IDE & linter configs (OS-specific)
+.vscode/
+pyrefly.toml
+
 # Internal team training & study guides (keep private/local)
 TaiLieuNoiBo_Nhom8/

@@ -21,7 +21,20 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 
+def _configure_console_utf8() -> None:
+    """Đảm bảo hiển thị tiếng Việt UTF-8 ổn định trên Windows Command Prompt / PowerShell."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if callable(reconfigure):
+            try:
+                reconfigure(encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+
+
 def main() -> None:
+    _configure_console_utf8()
+
     parser = argparse.ArgumentParser(
         description="Chương trình Cờ Caro 9x9 - MiniMax Alpha-Beta & MCTS UCT (Nhóm 8 - INT3401 4)"
     )
@@ -48,7 +61,12 @@ def main() -> None:
         return
 
     if args.plot:
-        from experiments.plot_charts import generate_all_charts
+        try:
+            from experiments.plot_charts import generate_all_charts
+        except ModuleNotFoundError as exc:
+            print(f"[!] Thiếu thư viện để vẽ biểu đồ ({exc}).")
+            print("    Hãy cài đặt trước bằng lệnh: pip install -r requirements.txt")
+            sys.exit(1)
         generate_all_charts()
         return
 

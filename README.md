@@ -42,6 +42,7 @@ Trò chơi cờ Caro trên bàn cờ kích thước **9 × 9** (81 ô):
 │   └── Slide_BTL_AI_INT3401_4_Nhom8.pptx     # Slide trình chiếu PPTX
 ├── MaNguon/
 │   ├── main.py                               # Điểm khởi chạy chính (GUI / CLI / Thực nghiệm)
+│   ├── run_windows.bat                       # Khởi chạy nhanh 1-click trên Windows (tự dò Python 3 & UTF-8)
 │   ├── README.md                             # Hướng dẫn chi tiết mã nguồn
 │   ├── requirements.txt                      # Thư viện tùy chọn (vẽ biểu đồ)
 │   ├── core/
@@ -90,19 +91,21 @@ Trò chơi cờ Caro trên bàn cờ kích thước **9 × 9** (81 ô):
 
 Chương trình được thiết kế chạy trực tiếp bằng thư viện chuẩn của **Python 3** (không cần cài thêm package bên ngoài khi chạy trò chơi).
 
+- **Trên Windows (nhanh nhất):** Mở thư mục `MaNguon/` và **nhấp đúp `run_windows.bat`** (tự động nhận `py -3`/`python` và bật UTF-8), hoặc chạy bằng Command Prompt / PowerShell:
+
 ```bash
 # 1. Chạy Giao diện Đồ họa (GUI - Khuyên dùng)
 cd MaNguon
-python3 main.py
+python main.py          # Windows (hoặc python3 main.py trên Linux/macOS)
 
 # 2. Chạy Giao diện Dòng lệnh (CLI)
-python3 main.py --cli
+python main.py --cli
 
 # 3. Tái lập lại toàn bộ Thực nghiệm (20 ván/cấu hình, SEED = 2026)
-python3 main.py --exp
+python main.py --exp
 
 # 4. Xuất lại 5 biểu đồ phân tích (Cần pip install -r requirements.txt)
-python3 main.py --plot
+python main.py --plot
 ```
 
 ---

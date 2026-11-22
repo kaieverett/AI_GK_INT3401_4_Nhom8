@@ -36,6 +36,8 @@ Chương trình được viết bằng ngôn ngữ **Python 3** (tương thích 
 Mở Terminal (hoặc Command Prompt) tại thư mục `MaNguon/` và thực hiện các lệnh sau (trên Windows có thể gõ `python` thay cho `python3`):
 
 ### 2.1. Chạy Giao diện Đồ họa Trực quan (Tkinter GUI - Mặc định)
+- **Windows (1-click):** Nhấp đúp tệp **`run_windows.bat`** trong thư mục `MaNguon/` (tự động dò Python 3 và bật tiếng Việt UTF-8).
+- **Hoặc qua Terminal / Command Prompt:**
 ```bash
 python3 main.py
 # Hoặc trên Windows:

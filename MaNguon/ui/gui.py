@@ -8,11 +8,16 @@ Mô tả: Giao diện đồ họa (GUI) sử dụng thư viện chuẩn Tkinter 
        - Hiển thị thống kê trực tiếp và nhật ký suy luận từng nước đi.
 """
 
+import sys
 import tkinter as tk
 from tkinter import ttk, messagebox
 from typing import Optional, Tuple
 from core.board import Board, EMPTY, PLAYER_X, PLAYER_O, BOARD_SIZE
 from agents import BaseAgent, RandomAgent, MiniMaxAgent, MCTSAgent, MCTSHeuristicAgent
+
+IS_WINDOWS = sys.platform.startswith("win")
+UI_FONT = "Segoe UI" if IS_WINDOWS else "DejaVu Sans"
+MONO_FONT = "Consolas" if IS_WINDOWS else "DejaVu Sans Mono"
 
 
 AGENT_OPTIONS = [
@@ -57,7 +62,7 @@ class CaroGUI:
         self.status_label = ttk.Label(
             left_frame,
             text="Lượt hiện tại: Quân X (Đi trước)",
-            font=("DejaVu Sans", 12, "bold"),
+            font=(UI_FONT, 12, "bold"),
             foreground="#1a5fb4",
         )
         self.status_label.pack(pady=(0, 6))
@@ -105,12 +110,12 @@ class CaroGUI:
 
         ttk.Label(param_box, text="Hệ số UCT (c):").grid(row=0, column=2, sticky=tk.W, padx=(10, 0), pady=3)
         self.var_c = tk.DoubleVar(value=1.4)
-        cb_c = ttk.Combobox(param_box, textvariable=self.var_c, values=[0.5, 1.0, 1.4, 2.0], width=8)
+        cb_c = ttk.Combobox(param_box, textvariable=self.var_c, values=("0.5", "1.0", "1.4", "2.0"), width=8)
         cb_c.grid(row=0, column=3, sticky=tk.W, padx=5, pady=3)
 
         ttk.Label(param_box, text="Số lượt MCTS (iter):").grid(row=1, column=0, sticky=tk.W, pady=3)
         self.var_iter = tk.IntVar(value=300)
-        cb_iter = ttk.Combobox(param_box, textvariable=self.var_iter, values=[100, 300, 500, 800], width=8)
+        cb_iter = ttk.Combobox(param_box, textvariable=self.var_iter, values=("100", "300", "500", "800"), width=8)
         cb_iter.grid(row=1, column=1, sticky=tk.W, padx=5, pady=3)
 
         ttk.Label(param_box, text="Quy tắc chọn MCTS:").grid(row=1, column=2, sticky=tk.W, padx=(10, 0), pady=3)
@@ -161,7 +166,7 @@ class CaroGUI:
         self.lbl_stat_summary = ttk.Label(
             stat_box,
             text="Chưa có nước đi của AI.",
-            font=("DejaVu Sans Mono", 9),
+            font=(MONO_FONT, 9),
             justify=tk.LEFT,
         )
         self.lbl_stat_summary.pack(anchor=tk.W)
@@ -170,7 +175,7 @@ class CaroGUI:
         log_box = ttk.LabelFrame(right_frame, text="5. Nhật ký Suy luận (Move & Pruning Log)", padding=6)
         log_box.pack(fill=tk.BOTH, expand=True)
 
-        self.log_text = tk.Text(log_box, height=12, width=52, font=("DejaVu Sans Mono", 9), state=tk.DISABLED)
+        self.log_text = tk.Text(log_box, height=12, width=52, font=(MONO_FONT, 9), state=tk.DISABLED)
         scrollbar = ttk.Scrollbar(log_box, orient=tk.VERTICAL, command=self.log_text.yview)
         self.log_text.configure(yscrollcommand=scrollbar.set)
         self.log_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -228,8 +233,8 @@ class CaroGUI:
             # Nhãn tọa độ
             x_center = m + i * cs + cs // 2
             y_center = m + i * cs + cs // 2
-            self.canvas.create_text(x_center, m // 2, text=str(i), font=("DejaVu Sans", 10, "bold"), fill="#5c4033")
-            self.canvas.create_text(m // 2, y_center, text=str(i), font=("DejaVu Sans", 10, "bold"), fill="#5c4033")
+            self.canvas.create_text(x_center, m // 2, text=str(i), font=(UI_FONT, 10, "bold"), fill="#5c4033")
+            self.canvas.create_text(m // 2, y_center, text=str(i), font=(UI_FONT, 10, "bold"), fill="#5c4033")
 
         for r in range(n):
             for c in range(n):
@@ -466,7 +471,23 @@ class CaroGUI:
         self._draw_board()
 
 
+def _enable_windows_dpi_awareness() -> None:
+    """Bật hiển thị sắc nét (High-DPI) cho Tkinter trên màn hình Windows scale 125%-150%."""
+    if not IS_WINDOWS:
+        return
+    try:
+        import ctypes
+        ctypes.windll.shcore.SetProcessDpiAwareness(1)
+    except Exception:
+        try:
+            import ctypes
+            ctypes.windll.user32.SetProcessDPIAware()
+        except Exception:
+            pass
+
+
 def run_gui() -> None:
+    _enable_windows_dpi_awareness()
     root = tk.Tk()
     CaroGUI(root)
     root.mainloop()
